@@ -1,0 +1,124 @@
+> init
+<<<
++ wug.txt wug.txt
+> add wug.txt
+<<<
+> commit "version 1 of wug.txt"
+<<<
++ wug.txt notwug.txt
+> add wug.txt
+<<<
+> commit "version 2 of wug.txt"
+<<<
+> branch b1
+<<<
+>checkout b1
+<<<
+> add wug.txt
+<<<
++ hello.txt hello.txt
+> add hello.txt
+<<<
+> commit "hello"
+<<<
+> checkout master
+<<<
++ World.txt World.txt
+> add World.txt
+<<<
+> commit "World"
+<<<
+
+D UID "[a-f0-9]+"
+D HEADER "commit (${UID})"
+D MERGE "Merge: (${UID}) (${UID})"
+D DATE "Date: \w\w\w \w\w\w \d+ \d\d:\d\d:\d\d \d\d\d\d [-+]\d\d\d\d"
+
+> log
+===
+${HEADER}
+${DATE}
+World
+
+===
+${HEADER}
+${DATE}
+version 2 of wug.txt
+
+===
+${HEADER}
+${DATE}
+version 1 of wug.txt
+
+===
+${HEADER}
+${DATE}
+initial commit
+
+<<<*
+
+#TODO: IN B1
+> checkout b1
+<<<
+
+> log
+===
+${HEADER}
+${DATE}
+hello
+
+===
+${HEADER}
+${DATE}
+version 2 of wug.txt
+
+===
+${HEADER}
+${DATE}
+version 1 of wug.txt
+
+===
+${HEADER}
+${DATE}
+initial commit
+<<<*
+D UID2 "${2}"
+>add wug.txt
+<<<
+>add hello.txt
+<<<
+
+>merge master
+
+<<<*
+
+> checkout master
+<<<
++ wug.txt hello.txt
+> add wug.txt
+<<<
+> commit "wug 3"
+<<<
+>checkout b1
+<<<
++ wug.txt World.txt
+> add wug.txt
+<<<
+>commit "wug b1"
+<<<
+
+> merge master
+Encountered a merge conflict.
+<<<<<<< HEAD
+<<<*
++ conflictwug.txt conflictwug.txt
+= wug.txt conflictwug.txt
+> reset ${UID2}
+=======
+>>>>>>> 7f57d5a363ef8e5f80d4a3260c4eff0a941f4b36
+<<<
+
+= wug.txt conflictwug.txt
+
+
+

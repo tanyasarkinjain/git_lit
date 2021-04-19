@@ -1,0 +1,38 @@
+> init
+<<<
++ wug.txt wug.txt
+> add wug.txt
+<<<
+> commit "wug 1"
+<<<
+> branch b1
+<<<
+>checkout b1
+<<<
++ wug.txt hello.txt
+> add wug.txt
+<<<
+> commit wug.txt
+<<<
+
+#checkout master and rm wug.txt
+> checkout master
+<<<
+> rm wug.txt
+<<<
+> commit wug.txt
+<<<
+
+#checkout b1: curr branch is b1!
+> checkout b1
+<<<
+> merge master
+Encountered a merge conflict.
+<<<
+= wug.txt conflict13wug.txt
+
+#> merge b1
+#Encounterd a merge conflict.
+#<<<
+#= wug.txt conflict13wug.txt
+#>

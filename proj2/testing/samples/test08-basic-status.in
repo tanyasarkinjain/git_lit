@@ -1,0 +1,319 @@
+# Check that we can check out a previous version.
+#Checks checkout branch
+D UID "[a-f0-9]+"
+> init
+<<<
++ wug.txt wug.txt
+> add wug.txt
+<<<
+> commit "version 1 of wug.txt"
+<<<
++ wug.txt notwug.txt
+> add wug.txt
+<<<
+> commit "version 2 of wug.txt"
+<<<
+= wug.txt notwug.txt
+# Each ${HEADER} captures its commit UID.
+D UID "[a-f0-9]+"
+D HEADER "commit (${UID})"
+D DATE "Date: \w\w\w \w\w\w \d+ \d\d:\d\d:\d\d \d\d\d\d [-+]\d\d\d\d"
+> log
+===
+${HEADER}
+${DATE}
+version 2 of wug.txt
+
+===
+${HEADER}
+${DATE}
+version 1 of wug.txt
+
+===
+${HEADER}
+${DATE}
+initial commit
+
+<<<*
+# UID of second version
+D UID2 "${1}"
+# UID of current version
+D UID1 "${2}"
+> checkout ${UID1} -- wug.txt
+<<<
+= wug.txt wug.txt
+> checkout ${UID2} -- wug.txt
+<<<
+
+
+#TODO:
+= wug.txt notwug.txt
+>status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+>rm wug.txt
+<<<
+>status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+wug.txt
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> commit "commit without wug file"
+<<<
+> checkout -- wug.txt
+File does not exist in that commit.
+<<<
+> add wug.txt
+File does not exist.
+<<<*
++ wug.txt wug.txt
+> add wug.txt
+<<<
+> commit "adding wug back"
+<<<
++ wug.txt hello.txt
+> add wug.txt
+<<<
++ World.txt world2.txt
+>add World.txt
+<<<
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+World.txt
+wug.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
++ World.txt World.txt
+> add World.txt
+<<<
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+World.txt
+wug.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> rm wug.txt
+<<<
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+World.txt
+
+=== Removed Files ===
+wug.txt
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+
++ hello.txt hello.txt
+> add hello.txt
+<<<
+> commit "with hello"
+<<<
+> rm hello.txt
+<<<
+> commit "without hello"
+<<<
+>status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> branch branch1
+<<<
+> branch branch1
+A branch with that name already exists.
+<<<
++world2.txt world2.txt
+> add world2.txt
+<<<
+> commit "master: world version 2"
+<<<
+> checkout branch1
+<<<
+> rm World.txt
+<<<
+> status
+=== Branches ===
+*branch1
+master
+
+=== Staged Files ===
+
+=== Removed Files ===
+World.txt
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> commit "branch1: without world"
+<<<
+
+
+>checkout master
+<<<
+
+> log
+===
+${HEADER}
+${DATE}
+master: world version 2
+
+===
+${HEADER}
+${DATE}
+without hello
+
+===
+${HEADER}
+${DATE}
+with hello
+
+===
+${HEADER}
+${DATE}
+adding wug back
+
+===
+${HEADER}
+${DATE}
+commit without wug file
+
+===
+${HEADER}
+${DATE}
+version 2 of wug.txt
+
+===
+${HEADER}
+${DATE}
+version 1 of wug.txt
+
+===
+${HEADER}
+${DATE}
+initial commit
+
+<<<*
+
+D UIDH "${2}"
+
+>rm-branch branch1
+<<<
+>checkout branch1
+No such branch exists.
+<<<
+>branch branch2
+<<<
++hi.txt hi.txt
+>checkout branch2
+There is an untracked file in the way; delete it, or add and commit it first.
+<<<
+
+>find "without hello"
+${UIDH}
+<<<
+
+> global-log
+===
+${HEADER}
+${DATE}
+[a-d0-9]+
+
+
+===
+${HEADER}
+${DATE}
+[a-d0-9]+
+
+===
+${HEADER}
+${DATE}
+[a-d0-9]+
+
+===
+${HEADER}
+${DATE}
+[a-d0-9]+
+
+===
+${HEADER}
+${DATE}
+[a-d0-9]+
+
+===
+${HEADER}
+${DATE}
+[a-d0-9]+
+
+===
+${HEADER}
+${DATE}
+[a-d0-9]+
+
+===
+${HEADER}
+${DATE}
+[a-d0-9]+
+
+===
+${HEADER}
+${DATE}
+[a-d0-9]+
+
+<<<*
+
+
+

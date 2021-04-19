@@ -1,0 +1,157 @@
+# Check that we can check out a previous version.
+#Checks checkout branch
+D UID "[a-f0-9]+"
+> init
+<<<
++ wug.txt wug.txt
+> add wug.txt
+<<<
+> commit "version 1 of wug.txt"
+<<<
++ wug.txt notwug.txt
+> add wug.txt
+<<<
+> commit "version 2 of wug.txt"
+<<<
+> branch b1
+<<<
+>checkout b1
+<<<
++ hello.txt hello.txt
+>add hello.txt
+<<<
+> commit "heyy"
+<<<
++ hi.txt hi.txt
+> add hi.txt
+<<<
+>commit "hii"
+<<<
+
+D UID "[a-f0-9]+"
+D HEADER "commit (${UID})"
+D DATE "Date: \w\w\w \w\w\w \d+ \d\d:\d\d:\d\d \d\d\d\d [-+]\d\d\d\d"
+> log
+===
+${HEADER}
+${DATE}
+hii
+
+===
+${HEADER}
+${DATE}
+heyy
+
+===
+${HEADER}
+${DATE}
+version 2 of wug.txt
+
+===
+${HEADER}
+${DATE}
+version 1 of wug.txt
+
+===
+${HEADER}
+${DATE}
+initial commit
+
+<<<*
+
+> checkout master
+<<<
+
+> log
+===
+${HEADER}
+${DATE}
+version 2 of wug.txt
+
+===
+${HEADER}
+${DATE}
+version 1 of wug.txt
+
+===
+${HEADER}
+${DATE}
+initial commit
+
+<<<*
+> merge b1
+${HEADER}
+Current branch fast-forwarded.
+<<<*
++World.txt World.txt
+> add World.txt
+<<<
+> commit "i am the world"
+<<<
+> merge b1
+${HEADER}
+Given branch is an ancestor of the current branch.
+<<<*
++notwug.txt notwug.txt
+> add notwug.txt
+<<<
+
+#TODO: why does notwug show up???? Should be on branch MASTERn
+> commit "notwug"
+<<<
+>checkout b1
+<<<
++world2.txt world2.txt
+> add world2.txt
+<<<*
+>commit "world2 bby"
+<<<
+
+
+> log
+===
+${HEADER}
+${DATE}
+world2 bby
+
+===
+${HEADER}
+${DATE}
+notwug
+
+===
+${HEADER}
+${DATE}
+i am the world
+
+===
+${HEADER}
+${DATE}
+hii
+
+===
+${HEADER}
+${DATE}
+heyy
+
+===
+${HEADER}
+${DATE}
+version 2 of wug.txt
+
+===
+${HEADER}
+${DATE}
+version 1 of wug.txt
+
+===
+${HEADER}
+${DATE}
+initial commit
+
+<<<*
+
+
+> merge master
+${HEADER}
+<<<*

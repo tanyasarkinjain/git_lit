@@ -1,0 +1,39 @@
+> init
+<<<
++ wug.txt wug.txt
+> add wug.txt
+<<<
+> commit "wug 1"
+<<<
+> branch b1
+<<<
+>checkout b1
+<<<
++ wug.txt hi.txt
+> add wug.txt
+<<<
+> merge master
+You have uncommitted changes.
+<<<
+> commit "changed wug"
+<<<
+> merge b2
+A branch with that name does not exist.
+<<<
++ hi.txt hi.txt
+> add hi.txt
+<<<
+> merge master
+You have uncommitted changes.
+<<<
+> commit "added hi"
+<<<
+>checkout master
+<<<
++ hi.txt hi.txt
+> merge b1
+There is an untracked file in the way; delete it, or add and commit it first.
+<<<
+> merge master
+"Cannot merge a branch with itself."
+<<<

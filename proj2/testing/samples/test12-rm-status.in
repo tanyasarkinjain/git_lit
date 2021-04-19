@@ -1,0 +1,86 @@
+> init
+<<<
++ wug.txt wug.txt
+> add wug.txt
+<<<
++ hello.txt hello.txt
+> add hello.txt
+<<<
+> commit "wug and hello"
+<<<
+D UID "[a-f0-9]+"
+D HEADER "commit (${UID})"
+D DATE "Date: \w\w\w \w\w\w \d+ \d\d:\d\d:\d\d \d\d\d\d [-+]\d\d\d\d"
+> log
+===
+${HEADER}
+${DATE}
+wug and hello
+
+===
+${HEADER}
+${DATE}
+initial commit
+
+<<<*
+# UID of second version
+D UID2 "${1}"
+
+> rm hello.txt
+<<<
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+hello.txt
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
++ hello.txt hello.txt
+> add hello.txt
+<<<
+>status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
++hi.txt hi.txt
+> add hi.txt
+<<<
+>commit "hi"
+<<<
++ World.txt World.txt
+>reset ${UID2}
+"There is an untracked file in the way; delete it, or add and commit it first.""
+<<<
+> add World.txt
+<<<
+> commit "world"
+<<<
+>reset ${UID2}
+<<<
+> add hi.txt
+File does not exist.
+<<<
+
+
+
+>checkout master
+"There is an untracked file in the way; delete it, or add and commit it first.""
+<<<
+> add hi.txt
+<<<

@@ -1,0 +1,46 @@
+> init
+<<<
++ wug.txt wug.txt
+> add wug.txt
+<<<
++hello.txt hello.txt
+> add hello.txt
+<<<
++ hi.txt hi.txt
+> add hi.txt
+<<<
+> commit "wug 1 and hello"
+<<<
+
+#TODO: creates new branch b1, checksout b1
+> branch b1
+<<<
+>checkout b1
+<<<
++ wug.txt hi.txt
+> add wug.txt
+<<<
++ wug.txt hello.txt
++ hello.txt hi.txt
+- hi.txt
++ World.txt World.txt
++ world2.txt world2.txt
+> status
+=== Branches ===
+*b1
+master
+
+=== Staged Files ===
+wug.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+hello.txt (modified)
+hi.txt (deleted)
+wug.txt (Modified)
+
+=== Untracked Files ===
+World.txt
+world2.txt
+<<<
